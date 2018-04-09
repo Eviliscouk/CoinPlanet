@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-navbar>
+      <ion-buttons start>
+          <button ion-button small icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-buttons end>
+          <button ion-button small icon-only (click)="onShowOptions($event)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Crypto Converter</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    
+   <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+      </ion-refresher-content>
+    </ion-refresher>
+  <ion-list>
+    <ion-item-divider >Fiat
+        <button item-end clear ion-button icon-only (click)="toggleFiat()">
+            <ion-icon name="eye"></ion-icon>
+        </button>
+    </ion-item-divider>
+    <div *ngIf="showFiat">
+    <ion-item (click)="fiatSelected(item)" *ngFor="let item of fiatRates">
+        <ion-grid item-content block>
+            <ion-row center>
+              <ion-col>
+                  <img src="assets/imgs/coins/{{item.symbol}}.svg">
+              </ion-col>
+              <ion-col col-10 text-left>
+                  <h2><strong>{{ item.name }}</strong></h2>
+              </ion-col>
+            </ion-row>
+            <ion-row center>
+                <ion-col>
+                    (USD Rate): {{ item.rate }}
+                </ion-col>
+            </ion-row>
+            <ion-row center>
+                <ion-col>
+                    <ion-label fixed>Qty:</ion-label>                
+                </ion-col>
+                <ion-col>
+                    <ion-input [(ngModel)]='item.displayQuantity' (click)='$event.stopPropagation()' (ionChange)='onChangeFiat(item)'></ion-input>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+      </ion-item>
+    </div>
+    <ion-item-divider *ngIf="favouriteCoins.length > 0">Favourite Crypto
+        <button item-end clear ion-button icon-only (click)="toggleFavourites()">
+            <ion-icon name="eye"></ion-icon>
+        </button>
+    </ion-item-divider>
+    <div *ngIf="showFavourites">
+    <ion-item-sliding *ngFor="let item of favouriteCoins" #slidingFavCoin>
+        <ion-item detail-push (click)="coinSelected(item)">
+          <ion-grid item-content block>
+              <ion-row center>
+                <ion-col>
+                    <img src="assets/imgs/coins/{{item.symbol}}.svg">
+                </ion-col>
+                <ion-col col-10 text-left>
+                    <h2><strong>{{ item.name }}</strong></h2>
+                </ion-col>
+              </ion-row>
+              <ion-row center>
+                  <ion-col>
+                      (BTC): {{ item.displayPriceBtc }}
+                  </ion-col>
+                  <ion-col>
+                      {{currency}}: {{ item.displayPriceFiat }}
+                  </ion-col>
+              </ion-row>
+              <ion-row center>
+                  <ion-col>
+                      <ion-label fixed>Qty:</ion-label>                
+                  </ion-col>
+                  <ion-col>
+                      <ion-input [(ngModel)]='item.displayQuantity' (click)='$event.stopPropagation()' (ionChange)='onChangeCoin(item)'></ion-input>
+                  </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button small color="danger" (click)="removeFavouriteCoin(slidingFavCoin,item)">
+            Remove
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </div>
+    <ion-item-divider>Crypto
+        <button item-end clear ion-button icon-only (click)="toggleCoins()">
+            <ion-icon name="eye"></ion-icon>
+        </button>
+    </ion-item-divider>
+    <div *ngIf="showCoins">
+    <ion-item-sliding *ngFor="let item of coins" #slidingCoin>
+    <ion-item detail-push (click)="coinSelected(item)">
+      <ion-grid item-content block>
+          <ion-row center>
+            <ion-col>
+                <img src="assets/imgs/coins/{{item.symbol}}.svg">
+            </ion-col>
+            <ion-col col-10 text-left>
+                <h2><strong>{{ item.name }}</strong></h2>
+            </ion-col>
+          </ion-row>
+          <ion-row center>
+              <ion-col>
+                  (BTC): {{ item.displayPriceBtc }}
+              </ion-col>
+              <ion-col>
+                  {{currency}}: {{ item.displayPriceFiat }}
+              </ion-col>
+          </ion-row>
+          <ion-row center>
+              <ion-col>
+                  <ion-label fixed>Qty:</ion-label>                
+              </ion-col>
+              <ion-col>
+                  <ion-input [(ngModel)]='item.displayQuantity' (click)='$event.stopPropagation()' (ionChange)='onChangeCoin(item)'></ion-input>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-item>
+    <ion-item-options>
+      <button ion-button small color="secondary" (click)="addFavouriteCoin(slidingCoin,item)">
+        Favorite
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</div>
+  </ion-list>
+</ion-content>

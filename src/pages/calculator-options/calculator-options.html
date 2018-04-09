@@ -1,0 +1,35 @@
+
+<ion-header>
+    <ion-navbar primary>
+        <ion-buttons start>
+          <button ion-button color="danger" (click)="onCancel()">Cancel</button>
+        </ion-buttons>
+    
+        <ion-title>
+          ...
+        </ion-title>
+    
+        <ion-buttons end>
+            <button ion-button color="primary" (click)="onSet()" strong>Done</button>
+        </ion-buttons>
+      </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+
+    <ion-list>
+      <ion-list-header>Hide Coins</ion-list-header>
+  
+      <ion-item *ngFor="let option of coinOptions">
+        <span item-start class="dot"></span>
+        <ion-avatar item-start>
+            <img src="assets/imgs/coins/{{option.symbol}}.svg">
+        </ion-avatar>
+
+        <ion-label>{{option.symbol}}</ion-label>
+        <ion-toggle [(ngModel)]="option.hidden" color="secondary"></ion-toggle>
+      </ion-item>
+  
+    </ion-list>
+
+  </ion-content>

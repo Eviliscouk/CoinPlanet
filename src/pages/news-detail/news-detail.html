@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Crypto News</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngIf="article">
+
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/imgs/coins/btc.svg">
+          </ion-avatar>
+          <h2>{{article.title}}</h2>
+          <p>{{article.publishedAt}}</p>
+        </ion-item>
+      
+        <img src="{{article.urlToImage}}">
+      
+        <ion-card-content>
+          <p>
+            {{article.description}}
+            <button ion-button icon-left clear small (click)="openWebpage(article.url)">
+              <ion-icon name="more"></ion-icon>
+            </button>
+         </p>
+        </ion-card-content>
+      </ion-card>
+      <ion-fab bottom right #fab>
+          <button ion-fab><ion-icon name="share"></ion-icon></button>
+          <ion-fab-list side="top">
+              <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+            <button ion-fab color="whatsapp" (click)="openSocial('WhatsApp', fab)"><ion-icon name="logo-whatsapp"></ion-icon></button>
+            <button ion-fab color="instagram" (click)="openSocial('Instagram', fab)"><ion-icon name="logo-instagram"></ion-icon></button>
+            <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
+          </ion-fab-list>
+        </ion-fab>
+</ion-content>

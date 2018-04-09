@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{coin?.symbol}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card *ngIf="coin">
+
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/imgs/coins/{{coin.symbol}}.svg">
+          </ion-avatar>
+          <h2>{{coin.name}}</h2>
+          <p>{{coin.price_btc}}</p>
+        </ion-item>
+          
+        <ion-card-content>
+            <ion-col text-center>
+                <p>%change 1hr :{{ coin.percent_change_1h }} </p>
+                <p>%change 1day:{{ coin.percent_change_24h }} </p>
+                <p>%change 7day:{{ coin.percent_change_7d }} </p>
+            </ion-col>
+        </ion-card-content>
+      
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>12 Likes</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div>4 Comments</div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <ion-note>
+                {{updatedTime}}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      
+      </ion-card>
+</ion-content>

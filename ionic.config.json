@@ -1,0 +1,14 @@
+{
+  "name": "cryptoPlanetApp",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [
+	{
+	  "path": "/api/data/coinsnapshot/",
+	  "proxyUrl": "https://www.cryptocompare.com/api/data/coinsnapshot/"
+	}
+  ]
+}
